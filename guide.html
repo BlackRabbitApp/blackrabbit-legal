@@ -1,28 +1,410 @@
-<aside class="shots">
-  <h2>Screenshots / Скриншоты</h2>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BlackRabbit User Guide | Руководство пользователя</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #121212;
+      color: #ddd;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.5;
+      padding: 22px 14px 40px;
+    }
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: #1a1a1a;
+      border: 1px solid #2d2d2d;
+      border-radius: 14px;
+      padding: 20px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      color: #f2f2f2;
+      font-size: 1.6rem;
+    }
+    .meta {
+      color: #9f9f9f;
+      margin: 0 0 16px;
+      font-size: 0.92rem;
+    }
+    .lead {
+      margin: 0 0 16px;
+      padding: 12px;
+      border: 1px solid #313131;
+      border-radius: 10px;
+      background: #181818;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 430px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+    .col {
+      border: 1px solid #2f2f2f;
+      border-radius: 10px;
+      padding: 14px;
+      background: #171717;
+    }
+    .col h2 {
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+      color: #ebebeb;
+    }
+    .col h3 {
+      margin: 14px 0 7px;
+      font-size: 0.98rem;
+      color: #dcdcdc;
+    }
+    .col p { margin: 0 0 8px; }
+    .col ul {
+      margin: 0 0 10px;
+      padding-left: 1.1rem;
+    }
+    .col li { margin: 0 0 5px; }
+    .mini {
+      border: 1px solid #313131;
+      border-radius: 8px;
+      padding: 9px 10px;
+      background: #1a1a1a;
+      margin: 0 0 10px;
+      font-size: 0.92rem;
+    }
+    .mini h4 {
+      margin: 0 0 6px;
+      font-size: 0.9rem;
+      color: #dedede;
+    }
+    table.lang-map {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0 0 10px;
+      font-size: 0.92rem;
+    }
+    .lang-map th, .lang-map td {
+      border: 1px solid #2f2f2f;
+      padding: 6px 7px;
+      text-align: left;
+    }
+    .lang-map th {
+      color: #dcdcdc;
+      background: #1d1d1d;
+      font-weight: 600;
+    }
+    .shots {
+      border: 1px solid #2f2f2f;
+      border-radius: 10px;
+      background: #161616;
+      padding: 10px;
+      position: sticky;
+      top: 10px;
+    }
+    .shots h2 {
+      margin: 0 0 9px;
+      font-size: 1rem;
+      color: #e8e8e8;
+    }
+    .shot {
+      margin: 0 0 10px;
+      border: 1px solid #2e2e2e;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #111;
+    }
+    .shot img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .cap {
+      font-size: 0.84rem;
+      color: #9f9f9f;
+      padding: 7px 8px;
+      border-top: 1px solid #2b2b2b;
+      background: #171717;
+    }
+    .badge {
+      display: inline-block;
+      border: 1px solid #3a4a68;
+      color: #a9c0ef;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 0.78rem;
+      margin-right: 6px;
+    }
+    .note {
+      margin-top: 14px;
+      border: 1px solid #313131;
+      border-radius: 9px;
+      padding: 10px 11px;
+      background: #181818;
+      color: #bdbdbd;
+      font-size: 0.9rem;
+    }
+    code {
+      background: #262626;
+      border-radius: 5px;
+      padding: 1px 5px;
+      color: #d7d7d7;
+      font-size: 0.92em;
+    }
+    a { color: #8ab4e8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    @media (max-width: 1040px) {
+      .grid { grid-template-columns: 1fr; }
+      .shots { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>BlackRabbit User Guide | Руководство пользователя</h1>
+    <p class="meta">Last updated: 2026-04-28</p>
+    <p class="lead">
+      <span class="badge">RU + EN</span>
+      Main function: fast on-page translation with compact interactive UI. BlackRabbit is designed to be quicker than opening external translation websites and more comfortable than standard popup tools.
+    </p>
 
-  <figure class="shot">
-    <img src="main-panel.png" alt="Main panel screenshot">
-    <figcaption class="cap">Main panel: input, output, paste/copy buttons.</figcaption>
-  </figure>
+    <div class="grid">
+      <section class="col">
+        <h2>Русский</h2>
 
-  <figure class="shot">
-    <img src="compact-view.png" alt="Compact panel screenshot">
-    <figcaption class="cap">Compact state of the panel.</figcaption>
-  </figure>
+        <h3>1) Как работает перевод</h3>
+        <ul>
+          <li><strong>Main</strong> — основной язык интерфейса и исходный язык.</li>
+          <li><strong>Cons</strong> — язык результата (куда переводим).</li>
+          <li>Пара <code>U - R</code> = перевод из EN в RU (пример текущей пары в заголовке панели).</li>
+          <li>Перевод запускается при вводе текста (с умной задержкой), без лишних кликов.</li>
+        </ul>
+        <table class="lang-map">
+          <thead>
+            <tr><th>Буква</th><th>Язык</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>U</code></td><td>English</td></tr>
+            <tr><td><code>R</code></td><td>Русский</td></tr>
+            <tr><td><code>E</code></td><td>Espanol</td></tr>
+            <tr><td><code>D</code></td><td>Deutsch</td></tr>
+            <tr><td><code>F</code></td><td>Francais</td></tr>
+            <tr><td><code>I</code></td><td>Italiano</td></tr>
+            <tr><td><code>P</code></td><td>Portugues</td></tr>
+            <tr><td><code>A</code></td><td>Arabic</td></tr>
+          </tbody>
+        </table>
 
-  <figure class="shot">
-    <img src="calculator-mode.png" alt="Calculator screenshot">
-    <figcaption class="cap">Calculator block in panel.</figcaption>
-  </figure>
+        <h3>2) Вставка и копирование (двойной клик + кнопки)</h3>
+        <ul>
+          <li>В поле ввода: <strong>двойной клик ЛКМ</strong> вставляет текст из буфера.</li>
+          <li>В поле перевода: <strong>двойной клик ЛКМ</strong> копирует перевод.</li>
+          <li>Есть отдельные кнопки: слева — вставить, справа — копировать.</li>
+          <li>Для интерактивности добавлены мягкие light-flash эффекты при вставке и копировании.</li>
+        </ul>
 
-  <figure class="shot">
-    <img src="audio-mode.png" alt="Audio screenshot">
-    <figcaption class="cap">Music mode and controls.</figcaption>
-  </figure>
+        <h3>3) Как открыть панель</h3>
+        <ul>
+          <li>Через иконку расширения в панели Chrome.</li>
+          <li>Через выделение текста на сайте: ПКМ -> “Translate with BlackRabbit”.</li>
+          <li>Если панель свернута, остается мини-кролик: клик по нему возвращает полную панель.</li>
+        </ul>
 
-  <figure class="shot">
-    <img src="game-mode.png" alt="Game screenshot">
-    <figcaption class="cap">Mini-game mode (example: Snake/BattleCity).</figcaption>
-  </figure>
-</aside>
+        <h3>4) Настройка панели под себя</h3>
+        <ul>
+          <li>Панель можно перетаскивать за header.</li>
+          <li>Размер можно менять (resizer внизу).</li>
+          <li>После вставки длинного текста панель может автоматически немного расширяться для удобства чтения.</li>
+        </ul>
+
+        <h3>5) Дополнительные режимы</h3>
+        <ul>
+          <li>В верхнем header есть скрытые кнопки/режимы.</li>
+          <li>Мини-игры и музыка встроены в интерфейс (без перехода на отдельные сайты).</li>
+          <li>Один игровой код для старта: <code>1337 = Snake</code>.</li>
+          <li>Один код для музыкального режима: <code>111 = ?</code>.</li>
+          <li><strong>GodMode</strong> существует, но способ активации намеренно не раскрывается в публичном гайде.</li>
+        </ul>
+
+        <h3>6) Лимиты Free Beta</h3>
+        <ul>
+          <li><strong>Free:</strong> до <strong>50</strong> переводов в день.</li>
+          <li>Лимит длины запроса: до <strong>1000</strong> символов за один перевод.</li>
+        </ul>
+
+        <h3>7) Польза расширения</h3>
+        <p>
+          BlackRabbit уменьшает трение: перевод на месте, быстрое копирование, визуальная обратная связь, настройка размера и компактный UI.
+          В большинстве альтернатив пользователь получает или неудобный внешний сайт, или более “глухое” popup-окно без интерактивных сценариев.
+        </p>
+
+        <h3>8) Обратная связь</h3>
+        <p>
+          Мы активно собираем фидбек по багам и улучшениям: новые фичи, языки, музыка, игры, UX-детали.
+          Пишите на <a href="mailto:blackrabbit.app@proton.me">blackrabbit.app@proton.me</a>.
+        </p>
+        <div class="mini">
+          <h4>Quick Start (30 сек)</h4>
+          <ul>
+            <li>Открой панель BlackRabbit.</li>
+            <li>Поставь пару языков (например, <code>U - R</code>).</li>
+            <li>Вставь текст (dblclick ЛКМ в input) и получи перевод.</li>
+          </ul>
+        </div>
+        <div class="mini">
+          <h4>Если что-то не работает</h4>
+          <ul>
+            <li>Проверь интернет и перезагрузи вкладку.</li>
+            <li>Попробуй другой короткий текст (до 1000 символов).</li>
+            <li>Проверь, не достигнут ли лимит Free <code>50/день</code>.</li>
+          </ul>
+        </div>
+        <div class="mini">
+          <h4>Шаблон баг-репорта</h4>
+          <p>
+            Пара языков: ...<br>
+            Текст: ...<br>
+            Что ожидал: ...<br>
+            Что получил: ...<br>
+            Скриншот: да/нет
+          </p>
+        </div>
+      </section>
+
+      <aside class="shots">
+        <h2>Screenshots / Скриншоты</h2>
+        <figure class="shot">
+          <img src="main-panel.png" alt="Main panel screenshot">
+          <figcaption class="cap">Main panel: input, output, paste/copy buttons.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="compact-view.png" alt="Compact panel screenshot">
+          <figcaption class="cap">Compact state of the panel.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="calculator-mode.png" alt="Calculator screenshot">
+          <figcaption class="cap">Calculator block in panel.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="audio-mode.png" alt="Audio screenshot">
+          <figcaption class="cap">Music mode and controls.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="game-mode.png" alt="Game screenshot">
+          <figcaption class="cap">Mini-game mode (example: Snake/BattleCity).</figcaption>
+        </figure>
+      </aside>
+
+      <section class="col">
+        <h2>English</h2>
+
+        <h3>1) Translation model</h3>
+        <ul>
+          <li><strong>Main</strong> = primary/source language.</li>
+          <li><strong>Cons</strong> = target/output language.</li>
+          <li><code>U - R</code> means EN -> RU in the current pair format.</li>
+          <li>Translation starts while typing (adaptive debounce), so users do not need extra submit actions.</li>
+        </ul>
+        <table class="lang-map">
+          <thead>
+            <tr><th>Letter</th><th>Language</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>U</code></td><td>English</td></tr>
+            <tr><td><code>R</code></td><td>Russian</td></tr>
+            <tr><td><code>E</code></td><td>Spanish</td></tr>
+            <tr><td><code>D</code></td><td>German</td></tr>
+            <tr><td><code>F</code></td><td>French</td></tr>
+            <tr><td><code>I</code></td><td>Italian</td></tr>
+            <tr><td><code>P</code></td><td>Portuguese</td></tr>
+            <tr><td><code>A</code></td><td>Arabic</td></tr>
+          </tbody>
+        </table>
+
+        <h3>2) Paste and copy workflows</h3>
+        <ul>
+          <li>Input field: <strong>double left click</strong> pastes from clipboard.</li>
+          <li>Output field: <strong>double left click</strong> copies translated text.</li>
+          <li>Dedicated buttons are available too: left = paste, right = copy.</li>
+          <li>Soft light flashes provide instant interaction feedback for paste/copy actions.</li>
+        </ul>
+
+        <h3>3) How to open the panel</h3>
+        <ul>
+          <li>From the extension icon in Chrome.</li>
+          <li>From page text selection: right click -> “Translate with BlackRabbit”.</li>
+          <li>When minimized, a mini rabbit remains on screen; click it to restore full panel mode.</li>
+        </ul>
+
+        <h3>4) Personalized layout</h3>
+        <ul>
+          <li>Drag the panel by its header.</li>
+          <li>Resize the panel from the bottom resizer.</li>
+          <li>After large paste input, the panel can auto-expand slightly to improve readability.</li>
+        </ul>
+
+        <h3>5) Hidden extras</h3>
+        <ul>
+          <li>Header contains hidden controls and mode entries.</li>
+          <li>Built-in mini-games and ambient music are part of the same panel.</li>
+          <li>Public game hint: <code>1337 = Snake</code>.</li>
+          <li>Public music hint: <code>111 = ?</code>.</li>
+          <li><strong>GodMode</strong> exists as an easter feature, activation is intentionally not disclosed here.</li>
+        </ul>
+
+        <h3>6) Current Free Beta limits</h3>
+        <ul>
+          <li><strong>Free plan:</strong> up to <strong>50</strong> translations per day.</li>
+          <li>Per-request text limit: up to <strong>1000</strong> characters.</li>
+        </ul>
+
+        <h3>7) Core value</h3>
+        <p>
+          BlackRabbit focuses on practical speed and convenience: in-page workflow, fast copy/paste, live feedback, and a compact customizable interface.
+          Most alternatives still force users into detached websites or less interactive popups.
+        </p>
+
+        <h3>8) Feedback welcome</h3>
+        <p>
+          We actively collect bug reports and feature requests: new language pairs, new games, new music loops, and UX upgrades.
+          Contact: <a href="mailto:blackrabbit.app@proton.me">blackrabbit.app@proton.me</a>.
+        </p>
+        <div class="mini">
+          <h4>Quick Start (30 sec)</h4>
+          <ul>
+            <li>Open BlackRabbit panel.</li>
+            <li>Set language pair (example: <code>U - R</code>).</li>
+            <li>Paste text (double left click in input) and get translation instantly.</li>
+          </ul>
+        </div>
+        <div class="mini">
+          <h4>Troubleshooting</h4>
+          <ul>
+            <li>Check internet connection and reload the page.</li>
+            <li>Try a short sample text (up to 1000 characters).</li>
+            <li>Check if Free daily limit <code>50/day</code> is reached.</li>
+          </ul>
+        </div>
+        <div class="mini">
+          <h4>Bug report template</h4>
+          <p>
+            Language pair: ...<br>
+            Text sample: ...<br>
+            Expected: ...<br>
+            Actual: ...<br>
+            Screenshot: yes/no
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <p class="note">
+      Screenshots in this guide are linked from the repository root:
+      <code>main-panel.png</code>, <code>compact-view.png</code>, <code>calculator-mode.png</code>, <code>audio-mode.png</code>, <code>game-mode.png</code>.
+    </p>
+  </main>
+</body>
+</html>
