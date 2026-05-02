@@ -47,6 +47,18 @@
     a { color: #8ab4e8; }
     .en { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid #2e2e2e; color: #aaa; font-size: 0.92rem; }
     .en h2 { font-size: 1rem; }
+    .nav-pay {
+      display: inline-block;
+      margin: 0.5rem 0 0;
+      padding: 10px 18px;
+      border-radius: 8px;
+      background: #2d6a4f;
+      color: #fff !important;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .nav-pay:hover { background: #40916c; }
   </style>
 </head>
 <body>
@@ -55,22 +67,23 @@
     <p class="meta">Дата последнего обновления: 25 апреля 2026 г.</p>
 
     <div class="callout">
-      <strong>Для публикации в Chrome Web Store</strong> Google требует общедоступный HTTPS-URL с политикой.
-      Скопируйте этот документ на свой сайт (или GitHub Pages / аналог) и укажите ссылку в
-      консоли разработчика расширения. Ссылка <code>chrome-extension://…</code> в магазине не подходит.
+      Публичная версия политики для Chrome Web Store listing (HTTPS URL).
+      <br><br>
+      <a class="nav-pay" href="payment.html">Оплатить Pro</a>
+      <span style="display:block;margin-top:0.5rem;font-size:0.88rem;">Отдельная страница оплаты (не внутри расширения).</span>
     </div>
 
     <p>
       Настоящая политика описывает, как расширение <strong>BlackRabbit</strong> для браузера Chrome
       (далее — «Расширение») обрабатывает данные. Оператором по отношению к данным пользователя является
-      лицо, опубликовавшее Расширение (замените на своё наименование / ИП / ООО при публикации).
+      лицо, опубликовавшее Расширение.
     </p>
 
     <h2>1. Какие данные обрабатываются</h2>
     <ul>
       <li><strong>Текст для перевода</strong> — вводится вами в поле Расширения или передаётся через контекстное меню «Перевести в BlackRabbit».</li>
       <li><strong>Настройки интерфейса</strong> — например выбранные языки, параметры мини-кролика, состояние панели (локально на устройстве).</li>
-      <li><strong>Технический идентификатор устройства для лимитов</strong> — случайный идентификатор, создаётся Расширением и хранится только локально; может передаваться на ваш сервер перевода (см. ниже), если вы его настроили.</li>
+      <li><strong>Технический идентификатор устройства для лимитов</strong> — случайный идентификатор, создаётся Расширением и хранится только локально; может передаваться на ваш сервер перевода (если он настроен).</li>
       <li><strong>Счётчики использования перевода</strong> — для отображения дневного лимита (локально и/или на сервере при подключённом backend).</li>
       <li><strong>Буфер обмена</strong> — читается только при явном действии (вставка / двойной клик по полю ввода), не в фоне.</li>
     </ul>
@@ -95,15 +108,12 @@
     </p>
     <ul>
       <li>
-        <strong>Через ваш backend (рекомендуется)</strong>, например Cloudflare Worker:
+        <strong>Через backend (рекомендуется)</strong>, например Cloudflare Worker:
         на сервер уходят идентификатор устройства, выбранные языки и текст фразы; сервер обращается к
-        публичному API Google Translate и может вести учёт квот. Текст не предназначен для долгого хранения
-        на сервере; фактическая политика хранения задаётся кодом и настройками вашего Worker.
+        API провайдеров перевода и может вести учёт квот.
       </li>
       <li>
-        <strong>Без отдельного сервера</strong>: запрос к API перевода выполняется из фона Расширения;
-        в этом случае действуют условия Google для соответствующего endpoint; идентификатор браузера
-        стандартен для HTTP-запросов.
+        <strong>Без отдельного сервера</strong>: запрос к API перевода выполняется из фона Расширения.
       </li>
     </ul>
 
@@ -113,52 +123,48 @@
       <li><strong>tabs</strong> — показ панели перевода на активной вкладке, синхронизация UI между вкладками, остановка аудио на другой вкладке.</li>
       <li><strong>clipboardRead</strong> — только для вставки текста по вашему действию.</li>
       <li><strong>contextMenus</strong> — пункт «Перевести в BlackRabbit» для выделенного текста.</li>
-      <li><strong>host_permissions</strong> — доступ к доменам перевода и при необходимости к вашему Cloudflare Worker (если вы его указали в манифесте).</li>
+      <li><strong>host_permissions</strong> — доступ к доменам перевода и при необходимости к вашему Cloudflare Worker.</li>
     </ul>
 
     <h2>5. Контент-скрипты</h2>
     <p>
       Интерфейс перевода и связанная логика выполняются в <strong>изолированном контексте</strong> расширения
-      на страницах, соответствующих шаблону в манифесте (включая обычный просмотр сайтов и видеохостинги).
-      В сборке для Chrome Web Store <strong>не подключаются</strong> отдельные скрипты в контексте страницы
-      (MAIN world) на YouTube или иных сайтах.
+      на страницах, соответствующих шаблону в манифесте.
     </p>
 
     <h2>6. Мини-игры и аудио</h2>
     <p>
       Игры и звуковые петли выполняются внутри Расширения; аудиофайлы загружаются из пакета Расширения.
-      Они не отправляют содержимое ваших вкладок на сервер разработчика игр.
     </p>
 
     <h2>7. Оплата и Pro</h2>
     <p>
       Оформление платной подписки (если включено) выполняется через сторонний платёжный сервис.
-      Расширение не хранит полные данные банковских карт; обработка платежей регулируется условиями
-      выбранного провайдера (например ЮKassa).
+      Расширение не хранит полные данные банковских карт.
     </p>
 
     <h2>8. Дети</h2>
     <p>Расширение не ориентировано на сбор данных о детях младше 13 лет сознательно.</p>
 
     <h2>9. Изменения</h2>
-    <p>Политика может обновляться; актуальная версия — по дате вверху страницы. Продолжая пользоваться Расширением после обновления, вы принимаете изменения, если иное не указано законом.</p>
+    <p>Политика может обновляться; актуальная версия — по дате вверху страницы.</p>
 
     <h2>10. Контакты</h2>
     <p>
       Вопросы по персональным данным:
       <a href="mailto:blackrabbit.app@proton.me">blackrabbit.app@proton.me</a>
     </p>
-    <p><a href="upgrade.html">Страница Pro / оплаты</a></p>
-<p><a href="guide.html">Руководство пользователя / User Guide</a></p>
+    <p><a href="payment.html">Оплата Pro</a></p>
+    <p><a href="guide.html">Руководство пользователя / User Guide</a></p>
+
     <div class="en">
       <h2>Privacy summary (English)</h2>
       <p>
-        BlackRabbit is a Chrome extension for translation, a calculator, mini-games, and optional background audio.
-        Translation text is sent to a translation API (either via a developer-operated Worker or from the extension background).
+        BlackRabbit is a Chrome extension for translation, calculator, mini-games, and optional background audio.
+        Translation text is sent to a translation API (via a developer-operated Worker or from extension background).
         Settings, a random device id for quotas, and usage counters are stored in <code>chrome.storage.local</code>;
-        short-lived audio UI state may use <code>chrome.storage.session</code>.
-        Clipboard is read only on explicit user paste actions. The Chrome Web Store build does not inject MAIN-world scripts into video sites.
-        We do not sell your translation content. For Chrome Web Store you must host this policy at a public HTTPS URL and link it in the Developer Dashboard.
+        short-lived audio state may use <code>chrome.storage.session</code>.
+        Clipboard is read only on explicit user paste actions.
       </p>
     </div>
   </div>
