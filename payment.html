@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <title>BlackRabbit — оплата Pro</title>
+  <style>
+    :root { color-scheme: dark; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #141414;
+      color: #d8d8d8;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+    .card {
+      width: min(560px, calc(100vw - 32px));
+      border: 1px solid #303030;
+      border-radius: 12px;
+      background: #1a1a1a;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      font-weight: 600;
+      color: #f0f0f0;
+    }
+    p, li {
+      margin: 0 0 10px;
+      font-size: 14px;
+      line-height: 1.45;
+      color: #b9b9b9;
+    }
+    ul { margin: 0 0 12px; padding-left: 1.2rem; }
+    .muted { color: #9a9a9a; font-size: 13px; }
+    .lang-note { margin-top: 18px; padding-top: 14px; border-top: 1px solid #2a2a2a; }
+    a.link { color: #8ab4e8; text-decoration: none; }
+    a.link:hover { text-decoration: underline; }
+    .row { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 14px; }
+    a.cta {
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 8px;
+      background: #3d5a80;
+      color: #fff;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    a.cta:hover { background: #4a6f9e; }
+    a.cta-pay {
+      background: #2d6a4f;
+    }
+    a.cta-pay:hover { background: #40916c; }
+    a.cta-donate {
+      background: #2c2c2c;
+      border: 1px solid #404040;
+      font-weight: 500;
+    }
+    a.cta-donate:hover { background: #383838; }
+    .referral-box {
+      margin-top: 18px;
+      padding: 14px;
+      border: 1px solid #303030;
+      border-radius: 12px;
+      background: #171717;
+      font-size: 13px;
+      line-height: 1.45;
+      color: #b9b9b9;
+    }
+    .referral-box .ref-title { color: #e6e6e6; font-weight: 700; margin-bottom: 8px; }
+    .referral-box ul { margin: 0 0 10px; padding-left: 1.15rem; }
+    .referral-box li { margin: 0 0 6px; font-size: 13px; line-height: 1.4; color: #b9b9b9; }
+    .ref-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .ref-col { border: 1px solid #2c2c2c; border-radius: 10px; padding: 12px; background: #1a1a1a; }
+    .ref-link { margin-top: 10px; padding-top: 12px; border-top: 1px solid #2a2a2a; }
+    .ref-link-box {
+      margin-top: 8px;
+      padding: 10px 12px;
+      border: 1px solid #333;
+      border-radius: 8px;
+      background: #222;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .ref-link-url {
+      flex: 1;
+      min-width: 0;
+      color: #8ab4e8;
+      text-decoration: none;
+      font-size: 13px;
+      word-break: break-all;
+    }
+    .copy-ref-btn {
+      border: 1px solid #3a4357;
+      background: rgba(142,166,216,0.1);
+      color: #9eb6e8;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 12px;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .copy-ref-btn:hover { background: rgba(142,166,216,0.16); }
+    @media (max-width: 720px) {
+      .ref-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>BlackRabbit Pro</h1>
+    <p><strong>RU:</strong> Оплата оформляется на защищённой странице платёжного провайдера. После успешной оплаты доступ Pro подключается автоматически (или вы получите код активации — в зависимости от настроек).</p>
+    <p><strong>EN:</strong> Checkout happens on your payment provider’s secure page. After a successful payment, Pro access is applied automatically (or you receive an activation code), depending on configuration.</p>
+
+    <div class="row">
+      <a id="payLink" class="cta cta-pay" href="https://app.cryptocloud.plus/?ref=C64G9GYO24" target="_blank" rel="noopener noreferrer">Оплатить Pro</a>
+      <!-- При появлении отдельной страницы/инвойса донатов в CryptoCloud замените href ниже -->
+      <a class="cta cta-donate" href="https://app.cryptocloud.plus/?ref=C64G9GYO24" target="_blank" rel="noopener noreferrer">Донаты · Donations</a>
+    </div>
+    <div class="referral-box">
+      <div class="ref-grid">
+        <div class="ref-col">
+          <div class="ref-title">Принимай криптоплатежи без лишней боли</div>
+          <p style="margin:0 0 8px;">Запуск за минуты, без сложной интеграции</p>
+          <p style="margin:0 0 6px;"><strong>⚡ Что внутри</strong></p>
+          <ul>
+            <li>Счета через API</li>
+            <li>Payment-links для клиентов</li>
+            <li>POSTBACK-уведомления</li>
+            <li>Поддержка криптовалют и сетей</li>
+            <li>Платёжная страница + QR</li>
+            <li>Интеграции: API, H2H, HTML, CMS</li>
+          </ul>
+        </div>
+        <div class="ref-col">
+          <div class="ref-title">Accept crypto payments without the hassle</div>
+          <p style="margin:0 0 8px;">Start in minutes, no complex setup</p>
+          <p style="margin:0 0 6px;"><strong>⚡ Features</strong></p>
+          <ul>
+            <li>API invoice creation</li>
+            <li>Payment links</li>
+            <li>POSTBACK notifications</li>
+            <li>Multi-chain support</li>
+            <li>Hosted page + QR</li>
+            <li>Integrations: API, H2H, HTML, CMS</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ref-link">
+        <div class="ref-link-box">
+          <button id="copyReferralBtn" class="copy-ref-btn" type="button">Копировать / Copy</button>
+          <a id="referralUrl" class="ref-link-url" href="https://app.cryptocloud.plus/?ref=C64G9GYO24" target="_blank" rel="noopener noreferrer">https://app.cryptocloud.plus/?ref=C64G9GYO24</a>
+        </div>
+      </div>
+    </div>
+
+    <ul>
+      <li><a class="link" href="success.html">Страница «оплата прошла»</a> / payment success</li>
+      <li><a class="link" href="privacy.html">Политика конфиденциальности</a></li>
+      <li><a class="link" href="guide.html">Руководство / User guide</a></li>
+    </ul>
+
+    <div class="lang-note muted">
+      <p>Поддержка: <a class="link" href="mailto:blackrabbit.app@proton.me">blackrabbit.app@proton.me</a></p>
+      <p style="margin-top:10px;font-size:12px;opacity:0.85;">Версия страницы: 2026-05-02b — нет этой строки = открыта старая копия (кэш или не залит файл на GitHub).</p>
+    </div>
+  </main>
+  <script>
+(function () {
+  var copyReferralBtn = document.getElementById('copyReferralBtn');
+  var referralUrl = document.getElementById('referralUrl');
+
+  if (copyReferralBtn && referralUrl) {
+    copyReferralBtn.addEventListener('click', function () {
+      var link = referralUrl.href || referralUrl.textContent || '';
+      var defaultLabel = 'Копировать / Copy';
+      if (!link) return;
+      navigator.clipboard.writeText(link)
+        .then(function () {
+          copyReferralBtn.textContent = 'Скопировано / Copied';
+          setTimeout(function () {
+            copyReferralBtn.textContent = defaultLabel;
+          }, 1500);
+        })
+        .catch(function () {
+          copyReferralBtn.textContent = 'Ошибка / Failed';
+          setTimeout(function () {
+            copyReferralBtn.textContent = defaultLabel;
+          }, 1500);
+        });
+    });
+  }
+})();
+  </script>
+</body>
+</html>
