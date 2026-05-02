@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <title>BlackRabbit Pro — оплата и информация</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f0f10;
+      --card: #161618;
+      --border: #2a2a2e;
+      --text: #d8d8dc;
+      --muted: #9898a0;
+      --accent: #6b8cbc;
+      --accent-hover: #7c9dcc;
+      --pay: #2d6a4f;
+      --pay-hover: #40916c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(ellipse 120% 80% at 50% -20%, rgba(61, 90, 128, 0.22), transparent 55%),
+        var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.45;
+    }
+    .wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 28px 18px 48px;
+    }
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--card);
+      padding: 28px 26px;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+    }
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 10px;
+      font-weight: 600;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(24px, 4.5vw, 30px);
+      font-weight: 650;
+      color: #f2f2f5;
+      letter-spacing: -0.02em;
+    }
+    .lead p {
+      margin: 0 0 12px;
+      font-size: 15px;
+      color: #c4c4cc;
+    }
+    .lead strong { color: #e8e8ee; }
+    ul.features {
+      margin: 16px 0 0;
+      padding-left: 1.15rem;
+      color: #b8b8c0;
+      font-size: 14px;
+    }
+    ul.features li { margin-bottom: 8px; }
+    section {
+      margin-top: 22px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    section:first-of-type { margin-top: 20px; }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #ebebef;
+    }
+    .checkout p {
+      margin: 0 0 10px;
+      font-size: 14px;
+      color: #b0b0b8;
+    }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .row--activate {
+      margin-top: 10px;
+    }
+    .row--activate .cta {
+      flex: 1 1 auto;
+      min-width: min(100%, 260px);
+      justify-content: center;
+    }
+    a.cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 22px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+    a.cta:active { transform: scale(0.98); }
+    a.cta-pay {
+      background: var(--pay);
+      color: #fff;
+    }
+    a.cta-pay:hover { background: var(--pay-hover); }
+    a.cta-donate {
+      background: #252528;
+      border: 1px solid #3a3a40;
+      color: #ddd;
+      font-weight: 500;
+    }
+    a.cta-donate:hover { background: #2f2f34; }
+    a.cta-activate {
+      background: transparent;
+      border: 1px solid #4a6f9e;
+      color: #9eb6e8;
+      font-weight: 600;
+    }
+    a.cta-activate:hover {
+      background: rgba(74, 111, 158, 0.18);
+      border-color: #5a7faf;
+    }
+    a.link {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a.link:hover { text-decoration: underline; color: var(--accent-hover); }
+
+    .hint-box {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid #333338;
+      background: rgba(255, 255, 255, 0.03);
+      font-size: 13px;
+      color: #a8a8b0;
+      line-height: 1.5;
+    }
+    .hint-box strong { color: #ddd; }
+
+    .referral-box {
+      margin-top: 8px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #121214;
+      font-size: 13px;
+      color: #b0b0b8;
+    }
+    .referral-box .ref-title { color: #ececf0; font-weight: 700; margin-bottom: 8px; font-size: 14px; }
+    .referral-box ul { margin: 0 0 10px; padding-left: 1.15rem; }
+    .referral-box li { margin: 0 0 6px; font-size: 13px; line-height: 1.4; color: #b0b0b8; }
+    .ref-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .ref-col {
+      border: 1px solid #2c2c32;
+      border-radius: 12px;
+      padding: 14px;
+      background: #161618;
+    }
+    .ref-link { margin-top: 12px; padding-top: 14px; border-top: 1px solid #2a2a30; }
+    .ref-link-box {
+      margin-top: 8px;
+      padding: 10px 12px;
+      border: 1px solid #333;
+      border-radius: 10px;
+      background: #1c1c20;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .ref-link-url {
+      flex: 1;
+      min-width: 0;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 13px;
+      word-break: break-all;
+    }
+    .copy-ref-btn {
+      border: 1px solid #3a4357;
+      background: rgba(142, 166, 216, 0.1);
+      color: #9eb6e8;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 12px;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .copy-ref-btn:hover { background: rgba(142, 166, 216, 0.16); }
+
+    .link-list {
+      display: grid;
+      gap: 8px;
+      margin: 12px 0 0;
+      font-size: 14px;
+    }
+    .footer-note {
+      margin-top: 22px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .footer-note p { margin: 8px 0 0; }
+    @media (max-width: 720px) {
+      .ref-grid { grid-template-columns: 1fr; }
+      .card { padding: 22px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <main class="card">
+      <p class="eyebrow">BlackRabbit Translate</p>
+      <h1>BlackRabbit Pro</h1>
+
+      <div class="lead">
+        <p><strong>RU:</strong> Pro открывает больше мини-игр, расширенные аудио-пресеты и повышенный дневной лимит перевода. В расширении есть скрытые коды для игр и музыки.</p>
+        <p><strong>EN:</strong> Pro unlocks more mini-games, advanced audio presets, and a higher daily translation limit. The extension includes secret game and music codes.</p>
+      </div>
+      <ul class="features">
+        <li>Расширенный набор игр и звуков / Expanded games &amp; sounds</li>
+        <li>Повышенный дневной лимит перевода / Higher daily translation cap</li>
+        <li>Оплата для РФ: планируется / RF checkout: planned</li>
+      </ul>
+
+      <section class="checkout" aria-labelledby="pay-head">
+        <h2 id="pay-head">Оплата · Checkout</h2>
+        <p><strong>RU:</strong> Оплата проходит на защищённой странице платёжного провайдера (CryptoCloud). После успешной оплаты доступ Pro подключается автоматически или вы получите код активации — в зависимости от настроек.</p>
+        <p><strong>EN:</strong> Checkout happens on the payment provider’s secure page. After a successful payment, Pro is applied automatically or you receive an activation code, depending on configuration.</p>
+
+        <div class="row">
+          <a id="payLink" class="cta cta-pay" href="https://app.cryptocloud.plus/?ref=C64G9GYO24" target="_blank" rel="noopener noreferrer">Upgrade to Pro</a>
+          <a class="cta cta-donate" href="https://app.cryptocloud.plus/?ref=C64G9GYO24" target="_blank" rel="noopener noreferrer">Донаты · Donations</a>
+        </div>
+        <!-- Chrome Web Store extension id -->
+        <div class="row row--activate">
+          <a class="cta cta-activate" href="chrome-extension://mlmnlaigfphfhiobfmifgdbigfjhpncp/upgrade.html" target="_blank" rel="noopener noreferrer">Активировать код · Activate code</a>
+        </div>
+
+        <div class="hint-box">
+          <strong>RU:</strong> Код Pro вводится на странице расширения — кнопка выше открывает её в Chrome (нужна установленная копия из Web Store). Подробнее — в <a class="link" href="guide.html">Руководстве</a>.<br>
+          <strong>EN:</strong> Enter your code on the extension page — the button above opens it in Chrome (BlackRabbit must be installed from the Web Store). See the <a class="link" href="guide.html">user guide</a> for details.
+        </div>
+      </section>
+
+      <section aria-labelledby="ref-head">
+        <h2 id="ref-head" class="visually-hidden" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;">CryptoCloud</h2>
+        <div class="referral-box">
+          <div class="ref-grid">
+            <div class="ref-col">
+              <div class="ref-title">Принимай криптоплатежи без лишней боли</div>
+              <p style="margin:0 0 8px;">Запуск за минуты, без сложной интеграции</p>
+              <p style="margin:0 0 6px;"><strong>⚡ Что внутри</strong></p>
+              <ul>
+                <li>Счета через API</li>
+                <li>Payment-links для клиентов</li>
+                <li>POSTBACK-уведомления</li>
+                <li>Поддержка криптовалют и сетей</li>
+                <li>Платёжная страница + QR</li>
+                <li>Интеграции: API, H2H, HTML, CMS</li>
+              </ul>
+            </div>
+            <div class="ref-col">
+              <div class="ref-title">Accept crypto payments without the hassle</div>
+              <p style="margin:0 0 8px;">Start in minutes, no complex setup</p>
+              <p style="margin:0 0 6px;"><strong>⚡ Features</strong></p>
+              <ul>
+                <li>API invoice creation</li>
+                <li>Payment links</li>
+                <li>POSTBACK notifications</li>
+                <li>Multi-chain support</li>
+                <li>Hosted page + QR</li>
+                <li>Integrations: API, H2H, HTML, CMS</li>
+              </ul>
+            </div>
+          </div>
+          <div class="ref-link">
+            <div class="ref-link-box">
+              <button id="copyReferralBtn" class="copy-ref-btn" type="button">Копировать / Copy</button>
+              <a id="referralUrl" class="ref-link-url" href="https://app.cryptocloud.plus/?ref=C64G9GYO24" target="_blank" rel="noopener noreferrer">https://app.cryptocloud.plus/?ref=C64G9GYO24</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="links-head">
+        <h2 id="links-head">Ссылки · Links</h2>
+        <div class="link-list">
+          <a class="link" href="success.html">Страница после успешной оплаты / Payment success</a>
+          <a class="link" href="privacy.html">Политика конфиденциальности / Privacy</a>
+          <a class="link" href="guide.html">Руководство / User guide</a>
+          <a class="link" href="FREE_BETA_POLICY.html">Статус Free Beta</a>
+          <a class="link" href="https://x.com/AlexInfiniteAi" target="_blank" rel="noopener noreferrer">X / @AlexInfiniteAi</a>
+          <a class="link" href="mailto:blackrabbit.app@proton.me">Поддержка: blackrabbit.app@proton.me</a>
+        </div>
+      </section>
+
+      <div class="footer-note">
+        <p>Поддержка / Support: <a class="link" href="mailto:blackrabbit.app@proton.me">blackrabbit.app@proton.me</a></p>
+        <p>Версия страницы: 2026-05-02e — если этой строки нет, открыта старая копия (кэш или файл не залит на GitHub Pages).</p>
+      </div>
+    </main>
+  </div>
+  <script>
+(function () {
+  var copyReferralBtn = document.getElementById('copyReferralBtn');
+  var referralUrl = document.getElementById('referralUrl');
+
+  if (copyReferralBtn && referralUrl) {
+    copyReferralBtn.addEventListener('click', function () {
+      var link = referralUrl.href || referralUrl.textContent || '';
+      var defaultLabel = 'Копировать / Copy';
+      if (!link) return;
+      navigator.clipboard.writeText(link)
+        .then(function () {
+          copyReferralBtn.textContent = 'Скопировано / Copied';
+          setTimeout(function () {
+            copyReferralBtn.textContent = defaultLabel;
+          }, 1500);
+        })
+        .catch(function () {
+          copyReferralBtn.textContent = 'Ошибка / Failed';
+          setTimeout(function () {
+            copyReferralBtn.textContent = defaultLabel;
+          }, 1500);
+        });
+    });
+  }
+})();
+  </script>
+</body>
+</html>
