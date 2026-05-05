@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BlackRabbit - Translate without switching tabs</title>
+  <meta name="description" content="BlackRabbit is a Chrome extension for inline translation, quick focus games, and ambient work sounds - all in one compact panel.">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0c10;
+      --card: #12141a;
+      --card-2: #181c24;
+      --text: #e6e8ef;
+      --muted: #a7adbb;
+      --line: #2a3140;
+      --accent: #6a93ff;
+      --accent-2: #67d9ff;
+      --glow: rgba(90, 160, 255, 0.36);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      min-height: 100vh;
+      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.45;
+      color: var(--text);
+      background:
+        radial-gradient(1000px 460px at 80% -80px, rgba(80, 130, 255, 0.18), transparent 58%),
+        radial-gradient(700px 340px at 10% -30px, rgba(65, 200, 255, 0.13), transparent 55%),
+        var(--bg);
+    }
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .brand { letter-spacing: .08em; text-transform: uppercase; font-weight: 700; }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 22px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .panel {
+      background: linear-gradient(180deg, rgba(22, 26, 34, .95), rgba(15, 18, 24, .95));
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 20px 46px rgba(0,0,0,.44);
+    }
+    h1 {
+      margin: 0 0 12px;
+      line-height: 1.08;
+      letter-spacing: -.02em;
+      font-size: clamp(32px, 5.4vw, 54px);
+    }
+    .lead {
+      margin: 0 0 18px;
+      color: #c6cbda;
+      font-size: clamp(16px, 2vw, 18px);
+      max-width: 54ch;
+    }
+    .proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .chip {
+      border: 1px solid #33425d;
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: 12px;
+      color: #bbd7ff;
+      background: rgba(23, 31, 46, .6);
+    }
+    .cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .btn {
+      border-radius: 10px;
+      border: 1px solid #3a4863;
+      padding: 11px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      color: #e8eefc;
+      background: #1b2232;
+      transition: transform .14s ease, box-shadow .14s ease, background .14s ease;
+    }
+    .btn:hover { transform: translateY(-1px); background: #232d41; }
+    .btn-primary {
+      border-color: #79a9ff;
+      color: #fff;
+      background: linear-gradient(90deg, #4c79ef, #4f96ff);
+      box-shadow: 0 10px 24px rgba(79, 140, 255, .35);
+    }
+    .btn-primary:hover { box-shadow: 0 14px 30px rgba(79, 140, 255, .45); }
+    .hero-shot {
+      border-radius: 18px;
+      border: 1px solid #2d3a52;
+      padding: 10px;
+      background: #10151f;
+      box-shadow: 0 0 0 1px rgba(80, 140, 255, .2) inset, 0 0 40px var(--glow);
+    }
+    .hero-shot img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 14px 0 22px;
+    }
+    .kpi {
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #151a22, #11151c);
+    }
+    .kpi strong { display: block; font-size: 24px; margin-bottom: 6px; }
+    .kpi span { color: var(--muted); font-size: 13px; }
+    .section {
+      margin-top: 14px;
+      padding: 22px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #131821, #10141b);
+    }
+    h2 {
+      margin: 0 0 8px;
+      font-size: 25px;
+      letter-spacing: -.01em;
+    }
+    .section p { margin: 0; color: #c3c9d8; }
+    .feature-grid {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .feature {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      background: linear-gradient(180deg, #191f2a, #141925);
+    }
+    .feature h3 {
+      margin: 0 0 6px;
+      font-size: 15px;
+      color: #d6e6ff;
+    }
+    .feature p {
+      margin: 0;
+      color: #b1b9cc;
+      font-size: 13px;
+    }
+    .shots {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .shot-card {
+      border: 1px solid #2b3650;
+      border-radius: 14px;
+      background: #0f141e;
+      padding: 10px;
+      box-shadow: 0 0 24px rgba(79, 141, 255, .18);
+    }
+    .shot-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 0 1px rgba(95, 158, 255, .22), 0 0 22px rgba(75, 145, 255, .26);
+    }
+    .caption {
+      margin-top: 9px;
+      font-size: 12px;
+      color: #9da8bf;
+    }
+    .links {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 13px;
+    }
+    .links a { color: #9fbeff; text-decoration: none; }
+    .links a:hover { text-decoration: underline; }
+    @media (max-width: 920px) {
+      .hero { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .shots { grid-template-columns: 1fr; }
+      .panel { padding: 22px; }
+      .section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="topbar">
+      <div class="brand">BlackRabbit</div>
+      <div>Built with vibe coding in Ho Chi Minh City</div>
+    </div>
+
+    <section class="hero">
+      <div class="panel">
+        <h1>Translate without<br>switching tabs.</h1>
+        <p class="lead">
+          BlackRabbit keeps translation in your current page, adds quick 5-minute games for reset, and ambient work sounds for focus.
+        </p>
+        <div class="proof">
+          <span class="chip">Free: 60 translations/day</span>
+          <span class="chip">Pro: 120/day</span>
+          <span class="chip">1000 chars per request</span>
+        </div>
+        <div class="cta">
+          <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/mlmnlaigfphfhiobfmifgdbigfjhpncp" target="_blank" rel="noopener noreferrer">Install from Chrome Web Store</a>
+          <a class="btn" href="guide.html">Open User Guide</a>
+          <a class="btn" href="payment.html">Upgrade / Activate</a>
+        </div>
+      </div>
+      <figure class="hero-shot">
+        <img src="guide-images/landing-large.png" alt="BlackRabbit extension panel in large mode">
+      </figure>
+    </section>
+
+    <section class="grid-3">
+      <div class="kpi">
+        <strong>Inline first</strong>
+        <span>Translate directly on the page instead of jumping through extra tabs.</span>
+      </div>
+      <div class="kpi">
+        <strong>5-minute reset</strong>
+        <span>Built-in mini games for short breaks without leaving your workflow.</span>
+      </div>
+      <div class="kpi">
+        <strong>Deep focus</strong>
+        <span>Ambient sounds for work sessions in the same compact panel.</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>A compact panel that adapts to your workflow</h2>
+      <p>
+        Resize the extension panel up or down based on your task: compact for quick translation, larger for reading context, game breaks, or audio controls.
+      </p>
+      <div class="shots">
+        <figure class="shot-card">
+          <img src="guide-images/landing-compact.png" alt="Compact BlackRabbit panel">
+          <figcaption class="caption">Compact layout for fast translation and copy flow.</figcaption>
+        </figure>
+        <figure class="shot-card">
+          <img src="guide-images/landing-audio.png" alt="BlackRabbit panel with audio controls">
+          <figcaption class="caption">Built-in ambient sounds for focused work sessions.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>More than a translator: productivity sidekick</h2>
+      <div class="feature-grid">
+        <div class="feature">
+          <h3>Inline translation overlay</h3>
+          <p>Read and translate without context switching, popups, or extra tabs.</p>
+        </div>
+        <div class="feature">
+          <h3>Resizable interface</h3>
+          <p>Increase or reduce panel size depending on reading depth and screen space.</p>
+        </div>
+        <div class="feature">
+          <h3>Quick game breaks</h3>
+          <p>Built-in mini games help reset attention in 3-5 minutes.</p>
+        </div>
+        <div class="feature">
+          <h3>Focus sounds</h3>
+          <p>Ambient audio controls are integrated in the same UI, no extra apps.</p>
+        </div>
+        <div class="feature">
+          <h3>Simple limits, clear UX</h3>
+          <p>Free 60/day and Pro 120/day with a 1000-char per-request cap.</p>
+        </div>
+        <div class="feature">
+          <h3>Fast build cycle</h3>
+          <p>Shipped with vibe coding + Cloudflare Workers reliability pipeline.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Work, translate, reset - all in one place</h2>
+      <p>
+        BlackRabbit is designed to reduce friction: no tool-hopping, less context loss, faster recovery between focus blocks.
+      </p>
+      <div class="shots">
+        <figure class="shot-card">
+          <img src="guide-images/landing-game.png" alt="BlackRabbit panel with built-in Tetris game">
+          <figcaption class="caption">5-minute game mode for a clean mental reset during long sessions.</figcaption>
+        </figure>
+      </div>
+      <div class="cta" style="margin-top:16px;">
+        <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/mlmnlaigfphfhiobfmifgdbigfjhpncp" target="_blank" rel="noopener noreferrer">Install BlackRabbit</a>
+        <a class="btn" href="guide.html">How it works</a>
+      </div>
+      <div class="links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="guide.html">User Guide</a>
+        <a href="payment.html">Checkout / Pro</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
