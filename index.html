@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BlackRabbit — Translate without switching tabs</title>
+  <meta name="description" content="BlackRabbit is a Chrome extension for inline translation without tab switching.">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f0f10;
+      --card: #161618;
+      --text: #d8d8dc;
+      --muted: #a1a1aa;
+      --border: #2a2a2e;
+      --accent: #6b8cbc;
+      --accent-hover: #7f9fce;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(ellipse 120% 80% at 50% -20%, rgba(61, 90, 128, 0.22), transparent 55%), var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.45;
+      padding: 24px 16px 40px;
+    }
+    .wrap {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--card);
+      padding: 28px 24px;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(28px, 5vw, 40px);
+      letter-spacing: -0.02em;
+      color: #f2f2f5;
+    }
+    .lead {
+      margin: 0 0 18px;
+      color: #c4c4cc;
+      font-size: 16px;
+    }
+    .bullets {
+      margin: 0 0 22px;
+      padding-left: 1.1rem;
+      color: #b9b9c1;
+    }
+    .bullets li { margin-bottom: 8px; }
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .btn {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: #e9e9ee;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: background .15s ease, border-color .15s ease;
+    }
+    .btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .btn.primary:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+    .btn:hover { border-color: #3a3a42; background: #1d1d22; }
+    .meta {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0;
+    }
+    .links {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .links a {
+      color: #9ec3f0;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .links a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card">
+      <h1>Translate without switching tabs.</h1>
+      <p class="lead">
+        BlackRabbit is a Chrome extension for inline translation that keeps your workflow in one place.
+      </p>
+
+      <ul class="bullets">
+        <li>Inline translation overlay on any page</li>
+        <li>Free plan: up to 60 translations/day</li>
+        <li>Pro plan: up to 120 translations/day</li>
+        <li>Per-request limit: 1000 characters</li>
+      </ul>
+
+      <div class="cta-row">
+        <a class="btn primary" href="https://chromewebstore.google.com/detail/mlmnlaigfphfhiobfmifgdbigfjhpncp" target="_blank" rel="noopener noreferrer">Install from Chrome Web Store</a>
+        <a class="btn" href="guide.html">Open User Guide</a>
+        <a class="btn" href="payment.html">Upgrade / Activate</a>
+      </div>
+
+      <p class="meta">Built with vibe coding in Ho Chi Minh City, Vietnam.</p>
+
+      <div class="links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="guide.html">User Guide</a>
+        <a href="payment.html">Checkout / Pro</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
